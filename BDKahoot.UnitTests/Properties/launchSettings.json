@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BDKahoot.UnitTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Environment": ""
+      }
+    }
+  }
+}

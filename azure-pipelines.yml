@@ -1,0 +1,137 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - quality
+      - master
+
+pool:
+  vmImage: 'windows-latest' # ubuntu-latest is faster than 'windows-latest' and independent of Azure App Service runtime, .NET supports cross-platform deployment.
+
+variables:
+  dotnetSdkVersion: '8.0.x'
+  buildOutputPath: $(Build.BinariesDirectory)/BDKahootAppBuild
+  artifactStagingPath: $(Build.ArtifactStagingDirectory)
+
+stages:
+  # Build Stage
+  - stage: Build
+    jobs:
+      - job: BuildJob
+        displayName: Build Stage
+        steps:
+          # Use .NET SDK
+          - task: UseDotNet@2
+            displayName: 'Use DotNet $(dotnetSdkVersion) SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '$(dotnetSdkVersion)'
+              performMultiLevelLookup: true
+
+          # Restore dependencies
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore dependencies'
+            inputs:
+              command: 'restore'
+              projects: '**/*.csproj'
+
+          # Build all projects
+          - task: DotNetCoreCLI@2
+            displayName: 'Build All Projects'
+            inputs:
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration Release'
+
+  # Test Stage
+  - stage: Test
+    dependsOn: Build
+    jobs:
+      - job: TestJob
+        displayName: Test Stage
+
+        steps:
+          # Use .NET SDK
+          - task: UseDotNet@2
+            displayName: 'Use DotNet $(dotnetSdkVersion) SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '$(dotnetSdkVersion)'
+              performMultiLevelLookup: true
+              
+          # Run Unit Tests
+          - task: DotNetCoreCLI@2
+            displayName: 'Run Unit Tests'
+            inputs:
+              command: 'test'
+              projects: '**/BDKahoot.UnitTests.csproj'
+              arguments: '--configuration Debug -- RunConfiguration.DisableAppDomain=true'
+            continueOnError: true
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run Integration Tests'
+            inputs:
+              command: 'test'
+              projects: '**/BDKahoot.IntegrationTests.csproj'
+              arguments: '--configuration Debug -- RunConfiguration.DisableAppDomain=true'
+            continueOnError: true
+
+  # Publish Stage
+  - stage: Publish
+    dependsOn: Test
+    jobs:
+      - job: PublishJob
+        displayName: Publish Stage
+        steps:
+          # Define WebJobs to be published
+          - ${{ each webJob in parameters.webJobs }}:
+              - task: DotNetCoreCLI@2
+                displayName: 'Publish ${{ webJob.name }} WebJob'
+                inputs:
+                  command: 'publish'
+                  publishWebProjects: false
+                  projects: ${{ webJob.project }}
+                  arguments: '--output $(buildOutputPath)/App_Data/jobs/${{ webJob.type }}/${{ webJob.name }}'
+                  zipAfterPublish: false
+                  modifyOutputPath: false
+              - script: |
+                  echo dotnet ${{ webJob.dll }} > $(buildOutputPath)/App_Data/jobs/${{ webJob.type }}/${{ webJob.name }}/run.cmd
+                displayName: 'Create run.cmd for ${{ webJob.name }}'
+
+          # Publish BDKahoot Web API
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish BDKahootApp WebAPI'
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--output $(buildOutputPath)'
+              zipAfterPublish: false
+              modifyOutputPath: false
+
+          # Archive Files
+          - task: ArchiveFiles@2
+            displayName: 'Archive BDKahootApp Build Output'
+            inputs:
+              rootFolderOrFile: '$(buildOutputPath)'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(artifactStagingPath)/BDKahootAppHost.zip'
+              replaceExistingArchive: true
+
+          # Publish Build Artifacts
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifacts'
+            inputs:
+              PathtoPublish: '$(artifactStagingPath)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+# Parameters
+parameters:
+  - name: webJobs # for WebJobs in Publish Stage
+    type: object
+    default:
+      - name: 'GameAnalyticJob'
+        project: '**/BDKahoot.GameAnalyticJob.csproj'
+        dll: 'BDKahoot.GameAnalyticJob.dll'
+        type: 'Triggered' # 'Triggered' or 'Continuous'

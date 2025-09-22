@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.API", "BDKahoot.API\BDKahoot.API.csproj", "{9A8E0ECB-AB0D-4CFA-97DB-3239CA821FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.Domain", "BDKahoot.Domain\BDKahoot.Domain.csproj", "{D877FCAA-1189-4CDB-9442-85A4DC853B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.Application", "BDKahoot.Application\BDKahoot.Application.csproj", "{204BAB9B-7BC7-445F-9BC4-084617541C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.Infrastructure", "BDKahoot.Infrastructure\BDKahoot.Infrastructure.csproj", "{F620F3D7-32D6-4D9E-8775-FC89FCE8AF14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.UnitTests", "BDKahoot.UnitTests\BDKahoot.UnitTests.csproj", "{1E4A1785-9597-4102-817C-1F6E763B667E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.IntegrationTests", "BDKahoot.IntegrationTests\BDKahoot.IntegrationTests.csproj", "{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDKahoot.Tests", "BDKahoot.Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDKahoot.WebJobs", "BDKahoot.WebJobs", "{F1E87FF2-0AD3-4F32-9AC5-C9154F044FA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDKahoot.GameAnalyticJob", "BDKahoot.GameAnalyticJob\BDKahoot.GameAnalyticJob.csproj", "{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A8E0ECB-AB0D-4CFA-97DB-3239CA821FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A8E0ECB-AB0D-4CFA-97DB-3239CA821FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A8E0ECB-AB0D-4CFA-97DB-3239CA821FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A8E0ECB-AB0D-4CFA-97DB-3239CA821FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D877FCAA-1189-4CDB-9442-85A4DC853B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D877FCAA-1189-4CDB-9442-85A4DC853B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D877FCAA-1189-4CDB-9442-85A4DC853B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D877FCAA-1189-4CDB-9442-85A4DC853B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{204BAB9B-7BC7-445F-9BC4-084617541C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{204BAB9B-7BC7-445F-9BC4-084617541C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{204BAB9B-7BC7-445F-9BC4-084617541C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{204BAB9B-7BC7-445F-9BC4-084617541C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F620F3D7-32D6-4D9E-8775-FC89FCE8AF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F620F3D7-32D6-4D9E-8775-FC89FCE8AF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F620F3D7-32D6-4D9E-8775-FC89FCE8AF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F620F3D7-32D6-4D9E-8775-FC89FCE8AF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E4A1785-9597-4102-817C-1F6E763B667E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4A1785-9597-4102-817C-1F6E763B667E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4A1785-9597-4102-817C-1F6E763B667E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4A1785-9597-4102-817C-1F6E763B667E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E4A1785-9597-4102-817C-1F6E763B667E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A3D7B93A-83A2-4D5F-9FAF-C58FD543B3E6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DCA1F32C-DD90-43B4-A9AF-F2B1E58655F3} = {F1E87FF2-0AD3-4F32-9AC5-C9154F044FA8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E9130C6-08A0-437A-A0A7-361AF9DD449A}
+	EndGlobalSection
+EndGlobal

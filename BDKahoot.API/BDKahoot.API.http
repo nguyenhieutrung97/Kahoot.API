@@ -1,0 +1,34 @@
+@BDKahoot.API_HostAddress = https://localhost:7007
+# @BDKahoot.API_HostAddress = https://bdkahoot-be.azurewebsites.net/
+
+GET {{BDKahoot.API_HostAddress}}/api/games
+Accept: application/json
+
+###
+
+GET {{BDKahoot.API_HostAddress}}/api/games/6870c616b048881d0f20dff9
+
+###
+
+POST {{BDKahoot.API_HostAddress}}/api/games
+Content-Type: application/json
+
+{
+  "Title": "Game Kahoot",
+  "HostUserId": "host-id",
+  "Description": "This is a sample game"
+}
+
+###
+
+PATCH {{BDKahoot.API_HostAddress}}/api/games/6870c616b048881d0f20dff9
+Content-Type: application/json
+
+{
+  "Title": "Game Kahoot Update",
+  "Description": "This is a sample game update"
+}
+
+###
+
+DELETE {{BDKahoot.API_HostAddress}}/api/games/6870c616b048881d0f20dff9

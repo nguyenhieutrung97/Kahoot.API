@@ -1,0 +1,4 @@
+{
+  // Daily at 1 A.M
+  "schedule": "0 0 1 * * *"
+}
